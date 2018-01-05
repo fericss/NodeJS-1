@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+		function listData(){
+			$.ajax({
+                    url: "/list",
+                    type: "GET",
+                    contentType: "application/json",
+                    processData: false,
+                    complete: function (data) {
+                        $('#list').html(JSonToTable($.parseJSON(data.responseText)));
+                    }
+                });
+		
+		}
+		function JSonToTable(data) {
+			var tbl_body = "";
+			var odd_even = false;
+			$.each(data, function() {
+				var tbl_row = "";
+				$.each(this, function(k , v) {
+					tbl_row += "<td>"+v+"</td>";
+				})
+				tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
+				odd_even = !odd_even;               
+			})
+			return tbl_body;
+		}
+	
+        $(document).ready(function () {
+            $('#add-submit').click(function () {
+                var payload = {
+                    title: $('#add-title').val(),
+					content: $('#add-content').val()
+                };
+                $.ajax({
+                    url: "/add",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+						listData();
+                    }
+                });
+            });
+			$('#remove-submit').click(function () {
+                var payload = {
+                    id: $('#remove-id').val()
+                };
+                $.ajax({
+                    url: "/remove",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+						listData();
+                    }
+                });
+            });
+			listData();
+        });
+    </script>
+  </head>
+  <body>
+    <h3>Enter a TODO to put into the database:</h3>
+    Title: <input id="add-title" type="text" />
+	Content: <input id="add-content" type="text" />
+    <input id="add-submit" type="submit" />
+	<br />
+	Remove by ID: <input id="remove-id" type="text" /><input id="remove-submit" type="submit" />
+    <p id="output"></p>
+    <p id="list"></p>
+  </body>
+</html>
