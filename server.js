@@ -24,7 +24,7 @@ con.connect(function(err) {
 con.query('USE NodeJS', function (err) {
 	if (err) throw err;
 });
-
+ 
 //Allows us to add files in our /public folder
 app.use(express.static(path.join(__dirname,"public")));
 
