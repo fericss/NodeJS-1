@@ -1,4 +1,5 @@
 var path = require("path");
+var fs = require('fs');
 var mysql = require("mysql");
 var bodyParser = require('body-parser');
 var express = require('express'),app = express(),port = process.env.PORT || 3000;
@@ -6,26 +7,35 @@ var express = require('express'),app = express(),port = process.env.PORT || 3000
 //Easy JSON parsing
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
+	extended: true
 })); 
 
 
 //DATABASE
 const con = mysql.createConnection({
-  host: "localhost",
-  user: "raspberry",
-  password: "password"
+	host: "localhost",
+	user: "raspberry",
+	password: "password"
 });
 con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to database!");
+	if (err) throw err;
+	console.log("Connected to database!");
 });
 con.query('USE NodeJS', function (err) {
-        if (err) throw err;
+	if (err) throw err;
 });
 
 //Allows us to add files in our /public folder
 app.use(express.static(path.join(__dirname,"public")));
+
+
+//Functions
+function writeToLog(txt){ //Create a local logfile
+	var fs = require('fs');
+	fs.appendFile('log.txt', txt, function (err) {
+		if (err) throw err;
+	});
+}
 
 //ROUTING
 app.get("/", function(req,res){
@@ -36,6 +46,8 @@ app.post("/add", function(req,res){
 			function (err, result) {
 				if (err) throw err;
 				res.send(result);
+				writeToLog(Date()+" INSERT: "+JSON.stringify(req.body)+JSON.stringify(result)+"\n");
+				
 			}
 	);
 });
@@ -44,6 +56,7 @@ app.post("/remove", function(req,res){
 			function (err, result) {
 				if (err) throw err;
 				res.send(result);
+				writeToLog(Date()+" DELETE: "+JSON.stringify(req.body)+JSON.stringify(result)+"\n");
 			}
 	);
 });
