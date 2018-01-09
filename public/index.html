@@ -10,21 +10,20 @@
                     contentType: "application/json",
                     processData: false,
                     complete: function (data) {
-                        $('#list').html(JSonToTable($.parseJSON(data.responseText)));
+                        $('#list').html("<table><tr><td>ID</td><td>Title</td><td>Content</td><td>Status</td></tr>"+JSonToTable($.parseJSON(data.responseText))+"</table>");
                     }
                 });
 		
 		}
 		function JSonToTable(data) {
 			var tbl_body = "";
-			var odd_even = false;
 			$.each(data, function() {
 				var tbl_row = "";
 				$.each(this, function(k , v) {
 					tbl_row += "<td>"+v+"</td>";
 				})
-				tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
-				odd_even = !odd_even;               
+				tbl_body += "<tr>"+tbl_row+"</tr>";
+             
 			})
 			return tbl_body;
 		}
@@ -63,6 +62,23 @@
                     }
                 });
             });
+			$('#modify-submit').click(function () {
+                var payload = {
+                    id: $('#modify-id').val(),
+					status: $('#modify-status').val()
+                };
+                $.ajax({
+                    url: "/modify",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+						listData();
+                    }
+                });
+            });
 			listData();
         });
     </script>
@@ -74,6 +90,10 @@
     <input id="add-submit" type="submit" />
 	<br />
 	Remove by ID: <input id="remove-id" type="text" /><input id="remove-submit" type="submit" />
+	<br />
+	Modify by ID: <input id="modify-id" type="text" />
+	Status: <input id="modify-status" type="text" />
+	<input id="modify-submit" type="submit" />
     <p id="output"></p>
     <p id="list"></p>
   </body>

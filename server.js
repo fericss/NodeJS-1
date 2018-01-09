@@ -24,7 +24,7 @@ con.connect(function(err) {
 con.query('USE NodeJS', function (err) {
 	if (err) throw err;
 });
- 
+
 //Allows us to add files in our /public folder
 app.use(express.static(path.join(__dirname,"public")));
 
@@ -57,6 +57,15 @@ app.post("/remove", function(req,res){
 				if (err) throw err;
 				res.send(result);
 				writeToLog(Date()+" DELETE: "+JSON.stringify(req.body)+JSON.stringify(result)+"\n");
+			}
+	);
+});
+app.post("/modify", function(req,res){
+		con.query('UPDATE test SET status='+req.body.status+' WHERE id='+req.body.id, 
+			function (err, result) {
+				if (err) throw err;
+				res.send(result);
+				writeToLog(Date()+" MODIFY: "+JSON.stringify(req.body)+JSON.stringify(result)+"\n");
 			}
 	);
 });

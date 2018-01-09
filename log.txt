@@ -1,3 +1,9 @@
 Tue Jan 09 2018 02:23:48 GMT+0100 (CET) INSERT: {"title":"dcsd","content":"sdsc"}{"fieldCount":0,"affectedRows":1,"insertId":16,"serverStatus":2,"warningCount":1,"message":"","protocol41":true,"changedRows":0}
 Tue Jan 09 2018 02:24:03 GMT+0100 (CET) DELETE: {"id":"14"}{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
 Tue Jan 09 2018 02:24:16 GMT+0100 (CET) INSERT: {"title":"sfgvfd","content":"vcxv"}{"fieldCount":0,"affectedRows":1,"insertId":17,"serverStatus":2,"warningCount":1,"message":"","protocol41":true,"changedRows":0}
+Tue Jan 09 2018 02:57:48 GMT+0100 (CET) DELETE: {"id":""}{"fieldCount":0,"affectedRows":0,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
+Tue Jan 09 2018 03:00:24 GMT+0100 (CET) DELETE: {"id":""}{"fieldCount":0,"affectedRows":0,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
+Tue Jan 09 2018 03:00:31 GMT+0100 (CET) DELETE: {"id":""}{"fieldCount":0,"affectedRows":0,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}
+Tue Jan 09 2018 03:02:57 GMT+0100 (CET) DELETE: {"id":"6","title":"","content":"","status":"1"}{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1  Changed: 1  Warnings: 0","protocol41":true,"changedRows":1}
+Tue Jan 09 2018 03:03:14 GMT+0100 (CET) DELETE: {"id":"16","title":"","content":"","status":"1"}{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1  Changed: 1  Warnings: 0","protocol41":true,"changedRows":1}
+Tue Jan 09 2018 03:04:13 GMT+0100 (CET) MODIFY: {"id":"15","status":"3"}{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1  Changed: 1  Warnings: 0","protocol41":true,"changedRows":1}
